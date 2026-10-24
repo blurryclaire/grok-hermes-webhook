@@ -1,0 +1,25 @@
+[project]
+name = "grok-hermes-webhook"
+version = "0.1.0"
+description = "Minimal Grok↔Hermes webhook contract: non-empty task, HMAC verify stub, zero secrets in tree."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "deedade" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+grok-hermes-webhook = "grok_hermes_webhook.receiver:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,6 @@
+{
+  "task": "Summarize yesterday's HK supermarket price digest in three bullets.",
+  "source": "example-client",
+  "delivery_id": "demo-delivery-001",
+  "priority": "normal"
+}
