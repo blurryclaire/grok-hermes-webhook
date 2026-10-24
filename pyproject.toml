@@ -1,7 +1,7 @@
 [project]
 name = "grok-hermes-webhook"
 version = "0.1.0"
-description = "Minimal Grok Bot ↔ Hermes webhook contract: non-empty task, HMAC verify stub, zero secrets in tree."
+description = "Hand Grok Bot tasks to local Hermes — signed webhook, non-empty task, 202 stub. Zero secrets in the tree."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }

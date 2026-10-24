@@ -2,28 +2,28 @@
 
 [![tests](https://github.com/deedade/grok-hermes-webhook/actions/workflows/ci.yml/badge.svg)](https://github.com/deedade/grok-hermes-webhook/actions/workflows/ci.yml)
 
-Minimal **Grok Bot ↔ Hermes** webhook contract: require a non-empty `payload.task`, verify **HMAC-SHA256** over the raw body, and return **202 accepted** from a tiny local receiver stub — with **zero real secrets** in the tree.
+Hand Grok Bot tasks to local Hermes — signed webhook, non-empty task, local 202 stub.
 
-This repository is the **Grok Bot ↔ Hermes** bridge (a local Hermes receiver stub). It is not an xAI API client.
+Minimal **Grok Bot ↔ Hermes** webhook contract: require a non-empty `payload.task`, verify **HMAC-SHA256** over the raw body, and return **202 accepted** from a tiny local receiver stub — with **zero real secrets** in the tree. It is not an xAI API client.
 
 ## Why
 
-Agent bridges often fail closed on the wrong checks: an empty task still gets accepted, a signature is verified only after JSON parse, or a secret lands in git. This repo is a small, copyable **Grok Bot ↔ Hermes** reference you can run on localhost. v0.1 is a stdlib stub under MIT. It acknowledges a signed task. It does not run production work.
+Empty tasks still get accepted, signatures are checked only after JSON parse, or a secret lands in git. This localhost stub is the small reference that closes those gaps. v0.1 is stdlib under MIT. It acknowledges a signed task. It does not run the job.
+
+Other agents can reuse the HMAC, non-empty-task, and 202 pattern. This tree is the **Grok Bot ↔ Hermes** reference, not a multi-runtime product.
 
 ## Use cases
 
-- Turn a **Grok Bot** strategy or draft into a local Hermes job — an API call, an IoT action, or a cron-style task — without committing secrets.
-- Reject an empty or missing task before any work starts.
-- Verify HMAC on the raw body before JSON is parsed, so a bad signature never reaches the parser.
+- Turn a strategy or draft into a local Hermes job — an API call, an IoT action, or a cron-style task — without committing secrets.
+- Refuse an empty or missing task before any work starts.
+- Refuse a bad signature before the body is parsed as JSON.
 
 ## Workflow
 
-Intended **Grok Bot ↔ Hermes** handoff:
-
-1. **Grok Bot** turns a strategy or draft into a task. The task string must be non-empty.
-2. A client posts that task as a **signed webhook**. The signature is `HMAC-SHA256` over the raw body. `WEBHOOK_SECRET` stays in the environment.
-3. The Hermes-side receiver returns **202 accepted** (`status=accepted`, `route=grok-bot-task`) and does not wait for the job to finish.
-4. After the async work, status comes back as a **four-part report**.
+1. Grok Bot turns a strategy or draft into a task. The task string must be non-empty.
+2. A client posts that task as a signed webhook. The signature is `HMAC-SHA256` over the raw body. `WEBHOOK_SECRET` stays in the environment.
+3. The local Hermes receiver returns **202 accepted** (`status=accepted`, `route=grok-bot-task`) and does not wait for the job to finish.
+4. After the async work, status comes back as a four-part report.
 
 **v0.1 stops at step 3.** The receiver checks the signature and the task, then returns 202. It does not enqueue the job, run it, or emit the four-part report. **202 means accepted for async work, not completed.**
 
