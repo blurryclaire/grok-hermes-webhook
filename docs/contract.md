@@ -1,5 +1,7 @@
 # Webhook contract (v0.1)
 
+Local receiver contract for the **Grok Bot ↔ Hermes** stub. Chat replies are not this webhook.
+
 ## Body
 
 - JSON **object**, max **1 MiB**
@@ -26,7 +28,7 @@
 | **404** | Wrong path |
 | **413** | Body too large |
 
-**202 means accepted for async work, not completed.**
+**202 means accepted for async work, not completed.** The later four-part status report is outside this stub.
 
 ## Chat completions (not this webhook)
 
