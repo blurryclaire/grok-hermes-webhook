@@ -5,7 +5,7 @@ description = "Hand Grok Bot tasks to local Hermes — signed webhook, non-empty
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-authors = [{ name = "deedade" }]
+authors = [{ name = "blurryclaire" }]
 dependencies = []
 
 [project.optional-dependencies]
