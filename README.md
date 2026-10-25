@@ -1,6 +1,6 @@
 # grok-hermes-webhook
 
-[![tests](https://github.com/deedade/grok-hermes-webhook/actions/workflows/ci.yml/badge.svg)](https://github.com/deedade/grok-hermes-webhook/actions/workflows/ci.yml)
+[![tests](https://github.com/blurryclaire/grok-hermes-webhook/actions/workflows/ci.yml/badge.svg)](https://github.com/blurryclaire/grok-hermes-webhook/actions/workflows/ci.yml)
 
 Hand Grok Bot tasks to local Hermes — signed webhook, non-empty task, local 202 stub.
 
